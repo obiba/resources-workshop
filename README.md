@@ -2,34 +2,49 @@
 
 ## Prerequisites
 
-The [resourcer](https://cran.r-project.org/package=resourcer) has quite some suggested dependencies. These are only suggestions,
-meaning that it will depend on the kind of resource that will be accessed at runtime.
+The [resourcer](https://cran.r-project.org/package=resourcer) has quite some suggested dependencies. These are only suggestions, meaning that it will depend on the kind of resource that will be accessed at runtime. See the [resourcer's Install](https://github.com/obiba/resourcer#install) section for the detail of the dependencies.
 
-### Tidy files
+**For the need of this workshop, only the following R packages are needed: readr, dplyr and ssh.**
 
-* [haven](https://cran.r-project.org/package=haven): Import and Export 'SPSS', 'Stata' and 'SAS' Files
+Tidy files:
+
 * [readr](https://cran.r-project.org/package=readr): Read Rectangular Text Data
-* [readxl](https://cran.r-project.org/package=readxl): Read Excel Files
 * [dplyr](https://cran.r-project.org/package=dplyr): A Grammar of Data Manipulation
 
-### Databases
-
-* [dbplyr](https://cran.r-project.org/package=dbplyr): A 'dplyr' Back End for Databases
-* [DBI](https://cran.r-project.org/package=DBI): R Database Interface
-* [RMariaDB](https://cran.r-project.org/package=RMariaDB): Database Interface and 'MariaDB' Driver
-* [RPostgres](https://cran.r-project.org/package=RPostgres): 'Rcpp' Interface to 'PostgreSQL'
-* [sparklyr](https://cran.r-project.org/package=sparklyr): R Interface to Apache Spark
-* [RPresto](https://cran.r-project.org/package=RPresto): DBI Connector to Presto
-* [nodbi](https://cran.r-project.org/package=nodbi): 'NoSQL' Database Connector
-* [mongolite](https://cran.r-project.org/package=mongolite): Fast and Simple 'MongoDB' Client for R
-
-### Remote computation server
+Remote computation server:
 
 * [ssh](https://cran.r-project.org/package=ssh): Secure Shell (SSH) Client for R
 
-### System dependencies
+### 0. R environment
+
+For a more friendly R environment and being able to run the proposed examples, [Rstudio](https://rstudio.com/products/rstudio/) is highly recommended.
+
+### 1. Install system dependencies
 
 R packages often depend on system libraries or other software external to R. These dependencies are not automatically installed.
 
-See the provided example script for installing the system requirements, per R package, for a Ubuntu 18.04 system: [install-system-requirements-ubuntu18.sh](https://github.com/obiba/resources-workshop/blob/main/install-system-requirements-ubuntu18.sh)
+#### Ubuntu
 
+```
+# curl requirements:
+sudo apt-get install libcurl4-openssl-dev libssl-dev
+
+# openssl requirements:
+sudo apt-get install libssl-dev
+
+# ssh requirements:
+sudo apt-get install libssh2-1-dev
+```
+
+#### Windows
+
+????
+
+### 2. Install R packages
+
+In a R console, install the R packages using the commands:
+
+```
+install.packages(c("readr", "dplyr", "ssh"))
+install.packages("resourcer")
+```
