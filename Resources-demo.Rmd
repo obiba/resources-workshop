@@ -1,0 +1,169 @@
+---
+title: "Resources Demo"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The resourcer Package
+
+Load the [resourcer](https://cran.r-project.org/package=R6) package (see also [source repository](https://github.com/obiba/resourcer). The output of this library load informs about the available resource **resolvers**. These are responsible for building the appropriate connector to a resource object. This set of resolvers can be extended to new types of resources.
+
+```{r building}
+library(resourcer)
+```
+
+Note that the `resourcer` package makes an extensive use of the [R6](https://cran.r-project.org/package=R6) class system.
+
+## Building a Data Resource Object
+
+The resource gives access to some data.
+
+### CSV File Resource
+
+The file is publicly available on the Github website: [preview of CAPostalCodes.csv](https://github.com/obiba/obiba-home/blob/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv). 
+
+```{r CAPostalCodes.res}
+CAPostalCodes.res <- resourcer::newResource(
+  url = "https://github.com/obiba/obiba-home/raw/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv", 
+  format = "csv"
+)
+CAPostalCodes.res
+```
+
+Note that at this point, no connection, nor data extraction has been performed. It is a simple definition object.
+
+The following code will resolve the resource and build the corresponding client connector.
+
+```{r CAPostalCodes.client}
+CAPostalCodes.client <- resourcer::newResourceClient(CAPostalCodes.res)
+class(CAPostalCodes.client)
+```
+
+The resource was identified as a "tidy" data file, i.e. data that can be read using one of the reader developed by the [tidyverse](https://www.tidyverse.org/) project. In the case of the `csv` data format, the [readr](https://readr.tidyverse.org/) package is used. This CSV reader tries to guess the data type of the columns.
+
+At this point again, no connection with the remote server has been formally established.
+
+This client function call gives access to the data as a `data.frame`:
+
+```{r CAPostalCodes.data}
+CAPostalCodes.data <- CAPostalCodes.client$asDataFrame()
+knitr::kable(head(CAPostalCodes.data))
+```
+It is also possible to coerce a resource object directly to a `data.frame`, without explicitly building a resource client object. It is as simple as:
+
+```{r CAPostalCodes.data2}
+CAPostalCodes.data <- as.data.frame(CAPostalCodes.res)
+knitr::kable(head(CAPostalCodes.data))
+```
+
+
+### R Data File Resource
+
+The file is stored in a Opal server file system. Authentication and authorization apply and is performed with a [Personal Access Token](http://opaldoc.obiba.org/en/latest/web-user-guide/my-profile.html#personal-access-tokens).
+
+```{r gps_participant.res}
+gps_participant.res <- resourcer::newResource(
+  url = "opal+https://opal-demo.obiba.org/ws/files/projects/RSRC/gps_participant.RData",
+  format = "data.frame",
+  secret = "EeTtQGIob6haio5bx6FUfVvIGkeZJfGq"
+)
+gps_participant.res
+```
+Make a resource client object.
+
+```{r gps_participant.client}
+gps_participant.client <- resourcer::newResourceClient(gps_participant.res)
+class(gps_participant.client)
+```
+
+The resource was identified as an R data file, containing a `data.frame` object.
+
+When extracting the inner R object from the remote R data file, the resource client object will establish the connection with the Opal server and will authenticate with the provided Personal Access Token; then it will perform the file download and will read its content. The function ``getValue()`` returns the raw object (in this case a `data.frame`)
+
+```{r gps_participant.data}
+gps_participant.data <- gps_participant.client$getValue()
+knitr::kable(head(gps_participant.data))
+```
+There are no limitations regarding the class of the object contained in the R data file. The only requirements are the ones of the `base::load()` function, i.e. the library in which the class of the object is defined must be available in the R environment.
+
+## Building a Computation Resource Object
+
+The resource gives access to some remote computation services.
+
+### SSH Resource
+
+A server is accessible through a secure shell. The path part of the URL is the remote working directory. The available commands are defined by the `exec` query parameter.
+
+```{r ssh.res}
+ssh.res <- resourcer::newResource(
+  url = "ssh://plink-demo.obiba.org:2222/home/master/brge?exec=ls,pwd",
+  identity = "master",
+  secret = "master"
+)
+```
+
+The resource connection client is resolved as follow:
+
+```{r ssh.client}
+ssh.client <- resourcer::newResourceClient(ssh.res)
+class(ssh.client)
+```
+
+This type of client allows to issue shell commands through a SSH connection.
+
+```{r ssh.cmds}
+ssh.client$getAllowedCommands()
+```
+
+Trying to coerce to a `data.frame` raises an error, because there is no tabular data representation of such a resource:
+
+```{r ssh.df}
+tryCatch(ssh.client$asDataFrame(), error = function(e) e)
+```
+
+To execute a remote shell command:
+
+```{r ssh.cmd}
+rval <- ssh.client$exec("ls", "-la")
+rval
+```
+
+The resulting value contains different information:
+
+* `status` of the command (failure if not 0),
+* `output` the character vector of the connad output,
+* `error` is the error message if command failed,
+* `command` is the actual shell command that was executed.
+
+For example some bad shell command arguments would return a value with an error:
+
+```{r ssh.cmd2}
+rval <- ssh.client$exec("ls", "-xyz")
+rval
+```
+
+Calling a shell command that is not allowed would raise an error.
+
+```{r ssh.cmd3}
+tryCatch(ssh.client$exec("plink"), error = function(e) e)
+```
+
+## More About Resources
+
+### Extending Resources
+
+The `resourcer` package comes with some built-in resource types. These can be extended by programming your own resource resolver and client. For more information, read the sections about Resources in the book [Orchestrating privacy-protected non-disclosive big data analyses of data from different resources with R and DataSHIELD](https://isglobal-brge.github.io/resource_bookdown).
+
+### Resources in Opal
+
+The Opal data management server facilitates the usage of resources by:
+
+* providing a graphical user interface for declaring resources (defining the resource's URL can be tricky),
+* discovering which type of resources are available in the R server environment,
+* granting permissions to use the resource,
+* assigning resources in a R server session,
+* integrating resources to DataSHIELD.
+
