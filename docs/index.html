@@ -389,32 +389,32 @@ summary {
 <h3>CSV File Resource</h3>
 <p>The file is publicly available on the Github website: <a href="https://github.com/obiba/obiba-home/blob/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv">preview of CAPostalCodes.csv</a>.</p>
 <pre class="r"><code>CAPostalCodes.res &lt;- resourcer::newResource(
-  url = &quot;https://github.com/obiba/obiba-home/raw/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv&quot;, 
+  url = &quot;https://github.com/obiba/obiba-home/raw/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv&quot;,
   format = &quot;csv&quot;
 )
 CAPostalCodes.res</code></pre>
 <pre><code>## $name
 ## [1] &quot;&quot;
-## 
+##
 ## $url
 ## [1] &quot;https://github.com/obiba/obiba-home/raw/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv&quot;
-## 
+##
 ## $identity
 ## NULL
-## 
+##
 ## $secret
 ## NULL
-## 
+##
 ## $format
 ## [1] &quot;csv&quot;
-## 
+##
 ## attr(,&quot;class&quot;)
 ## [1] &quot;resource&quot;</code></pre>
 <p>Note that at this point, no connection, nor data extraction has been performed. It is a simple definition object.</p>
 <p>The following code will resolve the resource and build the corresponding client connector.</p>
 <pre class="r"><code>CAPostalCodes.client &lt;- resourcer::newResourceClient(CAPostalCodes.res)
 class(CAPostalCodes.client)</code></pre>
-<pre><code>## [1] &quot;TidyFileResourceClient&quot; &quot;FileResourceClient&quot;     &quot;ResourceClient&quot;        
+<pre><code>## [1] &quot;TidyFileResourceClient&quot; &quot;FileResourceClient&quot;     &quot;ResourceClient&quot;
 ## [4] &quot;R6&quot;</code></pre>
 <p>The resource was identified as a “tidy” data file, i.e. data that can be read using one of the reader developed by the <a href="https://www.tidyverse.org/">tidyverse</a> project. In the case of the <code>csv</code> data format, the <a href="https://readr.tidyverse.org/">readr</a> package is used. This CSV reader tries to guess the data type of the columns.</p>
 <p>At this point again, no connection with the remote server has been formally established.</p>
@@ -422,8 +422,8 @@ class(CAPostalCodes.client)</code></pre>
 <pre class="r"><code>CAPostalCodes.data &lt;- CAPostalCodes.client$asDataFrame()
 head(CAPostalCodes.data)</code></pre>
 <pre><code>## # A tibble: 6 x 5
-##   entity_id Place                        Province ProvinceCode Coordinate       
-##   &lt;chr&gt;     &lt;chr&gt;                        &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;            
+##   entity_id Place                        Province ProvinceCode Coordinate
+##   &lt;chr&gt;     &lt;chr&gt;                        &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;
 ## 1 T0E       Western Alberta (Jasper)     Alberta  AB           [-117.2308,53.40…
 ## 2 T0A       Eastern Alberta (St. Paul)   Alberta  AB           [-111.7174,54.76…
 ## 3 T0B       Wainwright Region (Tofield)  Alberta  AB           [-111.5816,53.07…
@@ -434,8 +434,8 @@ head(CAPostalCodes.data)</code></pre>
 <pre class="r"><code>CAPostalCodes.data &lt;- as.data.frame(CAPostalCodes.res)
 head(CAPostalCodes.data)</code></pre>
 <pre><code>## # A tibble: 6 x 5
-##   entity_id Place                        Province ProvinceCode Coordinate       
-##   &lt;chr&gt;     &lt;chr&gt;                        &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;            
+##   entity_id Place                        Province ProvinceCode Coordinate
+##   &lt;chr&gt;     &lt;chr&gt;                        &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;
 ## 1 T0E       Western Alberta (Jasper)     Alberta  AB           [-117.2308,53.40…
 ## 2 T0A       Eastern Alberta (St. Paul)   Alberta  AB           [-111.7174,54.76…
 ## 3 T0B       Wainwright Region (Tofield)  Alberta  AB           [-111.5816,53.07…
@@ -454,25 +454,25 @@ head(CAPostalCodes.data)</code></pre>
 gps_participant.res</code></pre>
 <pre><code>## $name
 ## [1] &quot;&quot;
-## 
+##
 ## $url
 ## [1] &quot;opal+https://opal-demo.obiba.org/ws/files/projects/RSRC/gps_participant.RData&quot;
-## 
+##
 ## $identity
 ## NULL
-## 
+##
 ## $secret
 ## [1] &quot;EeTtQGIob6haio5bx6FUfVvIGkeZJfGq&quot;
-## 
+##
 ## $format
 ## [1] &quot;data.frame&quot;
-## 
+##
 ## attr(,&quot;class&quot;)
 ## [1] &quot;resource&quot;</code></pre>
 <p>Make a resource client object.</p>
 <pre class="r"><code>gps_participant.client &lt;- resourcer::newResourceClient(gps_participant.res)
 class(gps_participant.client)</code></pre>
-<pre><code>## [1] &quot;RDataFileResourceClient&quot; &quot;FileResourceClient&quot;     
+<pre><code>## [1] &quot;RDataFileResourceClient&quot; &quot;FileResourceClient&quot;
 ## [3] &quot;ResourceClient&quot;          &quot;R6&quot;</code></pre>
 <p>The resource was identified as an R data file, containing a <code>data.frame</code> object.</p>
 <p>When extracting the inner R object from the remote R data file, the resource client object will establish the connection with the Opal server and will authenticate with the provided Personal Access Token; then it will perform the file download and will read its content. The function <code>getValue()</code> returns the raw object (in this case a <code>data.frame</code>)</p>
@@ -502,7 +502,7 @@ head(gps_participant.data)</code></pre>
 <p>The resource connection client is resolved as follow:</p>
 <pre class="r"><code>ssh.client &lt;- resourcer::newResourceClient(ssh.res)
 class(ssh.client)</code></pre>
-<pre><code>## [1] &quot;SshResourceClient&quot;     &quot;CommandResourceClient&quot; &quot;ResourceClient&quot;       
+<pre><code>## [1] &quot;SshResourceClient&quot;     &quot;CommandResourceClient&quot; &quot;ResourceClient&quot;
 ## [4] &quot;R6&quot;</code></pre>
 <p>This type of client allows to issue shell commands through a SSH connection.</p>
 <pre class="r"><code>ssh.client$getAllowedCommands()</code></pre>
@@ -516,30 +516,30 @@ class(ssh.client)</code></pre>
 <pre class="r"><code>rval</code></pre>
 <pre><code>## $status
 ## [1] 0
-## 
+##
 ## $output
-## [1] &quot;total 92992&quot;                                              
-## [2] &quot;dr-xr-xr-x 2 master master     4096 Apr 29  2020 .&quot;       
-## [3] &quot;drwxr-xr-x 7 master master     4096 Jan  4 18:41 ..&quot;      
+## [1] &quot;total 92992&quot;
+## [2] &quot;dr-xr-xr-x 2 master master     4096 Apr 29  2020 .&quot;
+## [3] &quot;drwxr-xr-x 7 master master     4096 Jan  4 18:41 ..&quot;
 ## [4] &quot;-r--r--r-- 1 master master 57800003 Apr 29  2020 brge.bed&quot;
 ## [5] &quot;-r--r--r-- 1 master master  2781294 Apr 29  2020 brge.bim&quot;
 ## [6] &quot;-r--r--r-- 1 master master    45771 Apr 29  2020 brge.fam&quot;
 ## [7] &quot;-r--r--r-- 1 master master 34442346 Apr 29  2020 brge.gds&quot;
 ## [8] &quot;-r--r--r-- 1 master master    59802 Apr 29  2020 brge.phe&quot;
 ## [9] &quot;-r--r--r-- 1 master master    72106 Apr 29  2020 brge.txt&quot;
-## 
+##
 ## $error
 ## character(0)
-## 
+##
 ## $command
 ## [1] &quot;cd /home/master/brge &amp;&amp; ls -la&quot;
-## 
+##
 ## attr(,&quot;class&quot;)
 ## [1] &quot;resource.exec&quot;</code></pre>
 <p>The resulting value contains different information:</p>
 <ul>
 <li><code>status</code> of the command (failure if not 0),</li>
-<li><code>output</code> the character vector of the connad output,</li>
+<li><code>output</code> the character vector of the command output,</li>
 <li><code>error</code> is the error message if command failed,</li>
 <li><code>command</code> is the actual shell command that was executed.</li>
 </ul>
@@ -548,17 +548,17 @@ class(ssh.client)</code></pre>
 rval</code></pre>
 <pre><code>## $status
 ## [1] 2
-## 
+##
 ## $output
 ## character(0)
-## 
+##
 ## $error
-## [1] &quot;ls: invalid option -- &#39;y&#39;&quot;            
+## [1] &quot;ls: invalid option -- &#39;y&#39;&quot;
 ## [2] &quot;Try &#39;ls --help&#39; for more information.&quot;
-## 
+##
 ## $command
 ## [1] &quot;cd /home/master/brge &amp;&amp; ls -xyz&quot;
-## 
+##
 ## attr(,&quot;class&quot;)
 ## [1] &quot;resource.exec&quot;</code></pre>
 <p>Calling a shell command that is not allowed would raise an error.</p>

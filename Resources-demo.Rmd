@@ -136,7 +136,7 @@ rval
 The resulting value contains different information:
 
 * `status` of the command (failure if not 0),
-* `output` the character vector of the connad output,
+* `output` the character vector of the command output,
 * `error` is the error message if command failed,
 * `command` is the actual shell command that was executed.
 
