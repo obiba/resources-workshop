@@ -380,24 +380,6 @@ summary {
 <h2>The resourcer Package</h2>
 <p>Load the <a href="https://cran.r-project.org/package=R6">resourcer</a> package (see also <a href="https://github.com/obiba/resourcer">source repository</a>. The output of this library load informs about the available resource <strong>resolvers</strong>. These are responsible for building the appropriate connector to a resource object. This set of resolvers can be extended to new types of resources.</p>
 <pre class="r"><code>library(resourcer)</code></pre>
-<pre><code>## Loading required package: R6</code></pre>
-<pre><code>## Loading required package: httr</code></pre>
-<pre><code>## Registering LocalFileResourceGetter...</code></pre>
-<pre><code>## Registering HttpFileResourceGetter...</code></pre>
-<pre><code>## Registering ScpFileResourceGetter...</code></pre>
-<pre><code>## Registering GridFsFileResourceGetter...</code></pre>
-<pre><code>## Registering OpalFileResourceGetter...</code></pre>
-<pre><code>## Registering MariaDBResourceConnector...</code></pre>
-<pre><code>## Registering PostgresResourceConnector...</code></pre>
-<pre><code>## Registering SparkResourceConnector...</code></pre>
-<pre><code>## Registering PrestoResourceConnector...</code></pre>
-<pre><code>## Registering TidyFileResourceResolver...</code></pre>
-<pre><code>## Registering ShellResourceResolver...</code></pre>
-<pre><code>## Registering SshResourceResolver...</code></pre>
-<pre><code>## Registering RDataFileResourceResolver...</code></pre>
-<pre><code>## Registering RDSFileResourceResolver...</code></pre>
-<pre><code>## Registering SQLResourceResolver...</code></pre>
-<pre><code>## Registering NoSQLResourceResolver...</code></pre>
 <p>Note that the <code>resourcer</code> package makes an extensive use of the <a href="https://cran.r-project.org/package=R6">R6</a> class system.</p>
 </div>
 <div id="building-a-data-resource-object" class="section level2">
@@ -437,140 +419,29 @@ class(CAPostalCodes.client)</code></pre>
 <p>The resource was identified as a “tidy” data file, i.e. data that can be read using one of the reader developed by the <a href="https://www.tidyverse.org/">tidyverse</a> project. In the case of the <code>csv</code> data format, the <a href="https://readr.tidyverse.org/">readr</a> package is used. This CSV reader tries to guess the data type of the columns.</p>
 <p>At this point again, no connection with the remote server has been formally established.</p>
 <p>This client function call gives access to the data as a <code>data.frame</code>:</p>
-<pre class="r"><code>CAPostalCodes.data &lt;- CAPostalCodes.client$asDataFrame()</code></pre>
-<pre><code>## Loading required package: readr</code></pre>
-<pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   entity_id = col_character(),
-##   Place = col_character(),
-##   Province = col_character(),
-##   ProvinceCode = col_character(),
-##   Coordinate = col_character()
-## )</code></pre>
-<pre class="r"><code>knitr::kable(head(CAPostalCodes.data))</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">entity_id</th>
-<th align="left">Place</th>
-<th align="left">Province</th>
-<th align="left">ProvinceCode</th>
-<th align="left">Coordinate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">T0E</td>
-<td align="left">Western Alberta (Jasper)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-117.2308,53.4021]</td>
-</tr>
-<tr class="even">
-<td align="left">T0A</td>
-<td align="left">Eastern Alberta (St. Paul)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-111.7174,54.766]</td>
-</tr>
-<tr class="odd">
-<td align="left">T0B</td>
-<td align="left">Wainwright Region (Tofield)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-111.5816,53.0727]</td>
-</tr>
-<tr class="even">
-<td align="left">T0C</td>
-<td align="left">Central Alberta (Stettler)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-112.8113,52.4922]</td>
-</tr>
-<tr class="odd">
-<td align="left">T0H</td>
-<td align="left">Northwestern Alberta (High Level)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-116.9153,57.5403]</td>
-</tr>
-<tr class="even">
-<td align="left">T0G</td>
-<td align="left">North Central Alberta (Slave Lake)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-114.4529,55.6993]</td>
-</tr>
-</tbody>
-</table>
+<pre class="r"><code>CAPostalCodes.data &lt;- CAPostalCodes.client$asDataFrame()
+head(CAPostalCodes.data)</code></pre>
+<pre><code>## # A tibble: 6 x 5
+##   entity_id Place                        Province ProvinceCode Coordinate       
+##   &lt;chr&gt;     &lt;chr&gt;                        &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;            
+## 1 T0E       Western Alberta (Jasper)     Alberta  AB           [-117.2308,53.40…
+## 2 T0A       Eastern Alberta (St. Paul)   Alberta  AB           [-111.7174,54.76…
+## 3 T0B       Wainwright Region (Tofield)  Alberta  AB           [-111.5816,53.07…
+## 4 T0C       Central Alberta (Stettler)   Alberta  AB           [-112.8113,52.49…
+## 5 T0H       Northwestern Alberta (High … Alberta  AB           [-116.9153,57.54…
+## 6 T0G       North Central Alberta (Slav… Alberta  AB           [-114.4529,55.69…</code></pre>
 <p>It is also possible to coerce a resource object directly to a <code>data.frame</code>, without explicitly building a resource client object. It is as simple as:</p>
-<pre class="r"><code>CAPostalCodes.data &lt;- as.data.frame(CAPostalCodes.res)</code></pre>
-<pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   entity_id = col_character(),
-##   Place = col_character(),
-##   Province = col_character(),
-##   ProvinceCode = col_character(),
-##   Coordinate = col_character()
-## )</code></pre>
-<pre class="r"><code>knitr::kable(head(CAPostalCodes.data))</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">entity_id</th>
-<th align="left">Place</th>
-<th align="left">Province</th>
-<th align="left">ProvinceCode</th>
-<th align="left">Coordinate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">T0E</td>
-<td align="left">Western Alberta (Jasper)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-117.2308,53.4021]</td>
-</tr>
-<tr class="even">
-<td align="left">T0A</td>
-<td align="left">Eastern Alberta (St. Paul)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-111.7174,54.766]</td>
-</tr>
-<tr class="odd">
-<td align="left">T0B</td>
-<td align="left">Wainwright Region (Tofield)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-111.5816,53.0727]</td>
-</tr>
-<tr class="even">
-<td align="left">T0C</td>
-<td align="left">Central Alberta (Stettler)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-112.8113,52.4922]</td>
-</tr>
-<tr class="odd">
-<td align="left">T0H</td>
-<td align="left">Northwestern Alberta (High Level)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-116.9153,57.5403]</td>
-</tr>
-<tr class="even">
-<td align="left">T0G</td>
-<td align="left">North Central Alberta (Slave Lake)</td>
-<td align="left">Alberta</td>
-<td align="left">AB</td>
-<td align="left">[-114.4529,55.6993]</td>
-</tr>
-</tbody>
-</table>
+<pre class="r"><code>CAPostalCodes.data &lt;- as.data.frame(CAPostalCodes.res)
+head(CAPostalCodes.data)</code></pre>
+<pre><code>## # A tibble: 6 x 5
+##   entity_id Place                        Province ProvinceCode Coordinate       
+##   &lt;chr&gt;     &lt;chr&gt;                        &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;            
+## 1 T0E       Western Alberta (Jasper)     Alberta  AB           [-117.2308,53.40…
+## 2 T0A       Eastern Alberta (St. Paul)   Alberta  AB           [-111.7174,54.76…
+## 3 T0B       Wainwright Region (Tofield)  Alberta  AB           [-111.5816,53.07…
+## 4 T0C       Central Alberta (Stettler)   Alberta  AB           [-112.8113,52.49…
+## 5 T0H       Northwestern Alberta (High … Alberta  AB           [-116.9153,57.54…
+## 6 T0G       North Central Alberta (Slav… Alberta  AB           [-114.4529,55.69…</code></pre>
 </div>
 <div id="r-data-file-resource" class="section level3">
 <h3>R Data File Resource</h3>
@@ -606,76 +477,14 @@ class(gps_participant.client)</code></pre>
 <p>The resource was identified as an R data file, containing a <code>data.frame</code> object.</p>
 <p>When extracting the inner R object from the remote R data file, the resource client object will establish the connection with the Opal server and will authenticate with the provided Personal Access Token; then it will perform the file download and will read its content. The function <code>getValue()</code> returns the raw object (in this case a <code>data.frame</code>)</p>
 <pre class="r"><code>gps_participant.data &lt;- gps_participant.client$getValue()
-knitr::kable(head(gps_participant.data))</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="right">id</th>
-<th align="right">age</th>
-<th align="right">sex</th>
-<th align="right">inc</th>
-<th align="left">fsmoke</th>
-<th align="left">fedu</th>
-<th align="right">BMI</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">43.24393</td>
-<td align="right">0</td>
-<td align="right">45730.56</td>
-<td align="left">former</td>
-<td align="left">Higher</td>
-<td align="right">28.95163</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">44.17817</td>
-<td align="right">1</td>
-<td align="right">50169.00</td>
-<td align="left">current</td>
-<td align="left">Secondary</td>
-<td align="right">23.22624</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">53.89189</td>
-<td align="right">0</td>
-<td align="right">55981.00</td>
-<td align="left">never</td>
-<td align="left">Higher</td>
-<td align="right">26.60151</td>
-</tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">43.36741</td>
-<td align="right">1</td>
-<td align="right">67524.85</td>
-<td align="left">never</td>
-<td align="left">Secondary</td>
-<td align="right">24.60853</td>
-</tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">46.82916</td>
-<td align="right">0</td>
-<td align="right">47397.88</td>
-<td align="left">never</td>
-<td align="left">Higher</td>
-<td align="right">24.67301</td>
-</tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="right">57.70891</td>
-<td align="right">0</td>
-<td align="right">34686.13</td>
-<td align="left">former</td>
-<td align="left">Advanced</td>
-<td align="right">24.91010</td>
-</tr>
-</tbody>
-</table>
+head(gps_participant.data)</code></pre>
+<pre><code>##   id      age sex      inc  fsmoke      fedu      BMI
+## 1  1 43.24393   0 45730.56  former    Higher 28.95163
+## 2  2 44.17817   1 50169.00 current Secondary 23.22624
+## 3  3 53.89189   0 55981.00   never    Higher 26.60151
+## 4  4 43.36741   1 67524.85   never Secondary 24.60853
+## 5  5 46.82916   0 47397.88   never    Higher 24.67301
+## 6  6 57.70891   0 34686.13  former  Advanced 24.91010</code></pre>
 <p>There are no limitations regarding the class of the object contained in the R data file. The only requirements are the ones of the <code>base::load()</code> function, i.e. the library in which the class of the object is defined must be available in the R environment.</p>
 </div>
 </div>
@@ -703,8 +512,6 @@ class(ssh.client)</code></pre>
 <pre><code>## &lt;simpleError in ssh.client$asDataFrame(): Operation not applicable&gt;</code></pre>
 <p>To execute a remote shell command:</p>
 <pre class="r"><code>rval &lt;- ssh.client$exec(&quot;ls&quot;, &quot;-la&quot;)</code></pre>
-<pre><code>## Loading required package: ssh</code></pre>
-<pre><code>## Linking to libssh v0.7.0</code></pre>
 <pre><code>## Server fingerprint: b0:0c:f0:67:fd:a1:50:f3:93:7e:f2:40:74:e6:71:e7:70:23:e0:80</code></pre>
 <pre class="r"><code>rval</code></pre>
 <pre><code>## $status

@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Load the [resourcer](https://cran.r-project.org/package=R6) package (see also [source repository](https://github.com/obiba/resourcer). The output of this library load informs about the available resource **resolvers**. These are responsible for building the appropriate connector to a resource object. This set of resolvers can be extended to new types of resources.
 
-```{r building}
+```{r load, message=FALSE}
 library(resourcer)
 ```
 
@@ -48,15 +48,16 @@ At this point again, no connection with the remote server has been formally esta
 
 This client function call gives access to the data as a `data.frame`:
 
-```{r CAPostalCodes.data}
+```{r CAPostalCodes.data, message=FALSE}
 CAPostalCodes.data <- CAPostalCodes.client$asDataFrame()
-knitr::kable(head(CAPostalCodes.data))
+head(CAPostalCodes.data)
 ```
+
 It is also possible to coerce a resource object directly to a `data.frame`, without explicitly building a resource client object. It is as simple as:
 
-```{r CAPostalCodes.data2}
+```{r CAPostalCodes.data2, message=FALSE}
 CAPostalCodes.data <- as.data.frame(CAPostalCodes.res)
-knitr::kable(head(CAPostalCodes.data))
+head(CAPostalCodes.data)
 ```
 
 
@@ -85,8 +86,9 @@ When extracting the inner R object from the remote R data file, the resource cli
 
 ```{r gps_participant.data}
 gps_participant.data <- gps_participant.client$getValue()
-knitr::kable(head(gps_participant.data))
+head(gps_participant.data)
 ```
+
 There are no limitations regarding the class of the object contained in the R data file. The only requirements are the ones of the `base::load()` function, i.e. the library in which the class of the object is defined must be available in the R environment.
 
 ## Building a Computation Resource Object
@@ -126,7 +128,7 @@ tryCatch(ssh.client$asDataFrame(), error = function(e) e)
 
 To execute a remote shell command:
 
-```{r ssh.cmd}
+```{r ssh.cmd, message=FALSE, warning=FALSE, error=FALSE}
 rval <- ssh.client$exec("ls", "-la")
 rval
 ```
@@ -140,14 +142,14 @@ The resulting value contains different information:
 
 For example some bad shell command arguments would return a value with an error:
 
-```{r ssh.cmd2}
+```{r ssh.cmd2, message=FALSE}
 rval <- ssh.client$exec("ls", "-xyz")
 rval
 ```
 
 Calling a shell command that is not allowed would raise an error.
 
-```{r ssh.cmd3}
+```{r ssh.cmd3, message=FALSE}
 tryCatch(ssh.client$exec("plink"), error = function(e) e)
 ```
 
