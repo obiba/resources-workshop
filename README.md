@@ -1,5 +1,15 @@
 # Resources Workshop
 
+## Quick Start
+
+For those in hurry:
+
+```
+install.packages(c("readr", "dplyr", "ssh", "resourcer"))
+```
+
+For the others or if you encounter issues, see instructions that follows.
+
 ## Prerequisites
 
 The [resourcer](https://cran.r-project.org/package=resourcer) has quite some suggested dependencies. These are only suggestions, meaning that it will depend on the kind of resource that will be accessed at runtime. See the [resourcer's Install](https://github.com/obiba/resourcer#install) section for the detail of the dependencies.
@@ -43,7 +53,7 @@ sudo apt-get install libssh2-1-dev
 
 #### Windows
 
-????
+Additional libraries are not needed.
 
 ### 2. Install R packages
 
