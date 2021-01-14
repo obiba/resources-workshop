@@ -23,7 +23,7 @@ knitr::opts_chunk$set(comment="", warning=FALSE, message=FALSE, cache=TRUE)
 
 # The resourcer Package
 
-The [resourcer](https://cran.r-project.org/package=resourcer) package is an R implementation of the concept of Resources (see also the [source repository](https://github.com/obiba/resourcer)).
+The [resourcer](https://cran.r-project.org/package=resourcer) package is an R implementation of the concept of Resources (see also the <a href="https://github.com/obiba/resourcer" target="_blank">source repository</a>).
 
 ## Installation
 
@@ -51,7 +51,7 @@ The resource gives access to some data.
 
 ## CSV File Resource
 
-The file is publicly available on the Github website: [preview of CAPostalCodes.csv](https://github.com/obiba/obiba-home/blob/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv). 
+The file is publicly available on the Github website: <a href="https://github.com/obiba/obiba-home/blob/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv" target="_blank">preview of CAPostalCodes.csv</a>. 
 
 ```{r CAPostalCodes.res}
 CAPostalCodes.res <- resourcer::newResource(
@@ -91,7 +91,7 @@ head(CAPostalCodes.data)
 
 ## R Data File Resource
 
-The file is stored in a Opal server file system. Authentication and authorization apply and is performed with a [Personal Access Token](http://opaldoc.obiba.org/en/latest/web-user-guide/my-profile.html#personal-access-tokens).
+The file is stored in a Opal server file system. Authentication and authorization apply and is performed with a <a href="http://opaldoc.obiba.org/en/latest/web-user-guide/my-profile.html#personal-access-tokens" target="_blank">Personal Access Token</a>.
 
 ```{r gps_participant.res}
 gps_participant.res <- resourcer::newResource(
@@ -197,4 +197,4 @@ The Opal data management server facilitates the usage of resources by:
 * assigning resources in a R server session,
 * integrating resources to DataSHIELD.
 
-See also [Tutorial: Using the resources in Opal and DataSHIELD](https://rpubs.com/jrgonzalezISGlobal/tutorial_resources).
+See also <a href="https://rpubs.com/jrgonzalezISGlobal/tutorial_resources" target="_blank">Tutorial: Using the resources in Opal and DataSHIELD</a>.
