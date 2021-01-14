@@ -25,7 +25,7 @@ knitr::opts_chunk$set(comment="", warning=FALSE, message=FALSE, cache=TRUE)
 
 This tutorial aims to provide examples about how to deal with resources in Opal and DataSHIELD. More detailed information can be found in our bookdown [Orchestrating privacy-protected non-disclosive big data analyses of data from different resources with R and DataSHIELD](https://isglobal-brge.github.io/resource_bookdown/).
 
-A quick demo of the resources is also available [here](https://rpubs.com/ymarcon/713068).
+A quick demo of the resources is also available in [Tutorial: Resources in R](https://rpubs.com/ymarcon/713068).
 
 
 # Getting started
