@@ -91,7 +91,7 @@ head(CAPostalCodes.data)
 
 ## R Data File Resource
 
-The file is stored in a Opal server file system. Authentication and authorization apply and is performed with a [Personal Access Token](http://opaldoc.obiba.org/en/latest/web-user-guide/my-profile.html#personal-access-tokens).
+The file is stored in a Opal server file system. Authentication and authorization apply and is performed with a <a href="http://opaldoc.obiba.org/en/latest/web-user-guide/my-profile.html#personal-access-tokens" target="_blank">Personal Access Token</a>.
 
 ```{r gps_participant.res}
 gps_participant.res <- resourcer::newResource(
