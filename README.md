@@ -13,7 +13,7 @@ For those in hurry:
 
 ```
 install.packages(c("readr", "dplyr", "ssh", "resourcer", "DSOpal"))
-devtools::install_github("datashield/dsBaseClient")
+install.packages("dsBaseClient", repos = c("https://cran.obiba.org"))
 ```
 
 For the others or if you encounter issues, see instructions that follows.
