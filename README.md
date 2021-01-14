@@ -9,6 +9,10 @@ install.packages(c("readr", "dplyr", "ssh", "resourcer", "DSOpal"))
 devtools::install_github("datashield/dsBaseClient")
 ```
 
+- [Vignette resources demo](https://rpubs.com/ymarcon/713068)
+- [Vignette resources examples]()
+
+
 For the others or if you encounter issues, see instructions that follows.
 
 ## Prerequisites
