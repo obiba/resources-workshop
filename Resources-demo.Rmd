@@ -187,7 +187,7 @@ tryCatch(ssh.client$exec("plink"), error = function(e) e)
 
 The `resourcer` package comes with some built-in resource types. These can be extended by programming your own resource resolver and client. For more information, read the sections about Resources in the book [Orchestrating privacy-protected non-disclosive big data analyses of data from different resources with R and DataSHIELD](https://isglobal-brge.github.io/resource_bookdown).
 
-## Resources in Opal
+## Resources in Opal and DataSHIELD
 
 The Opal data management server facilitates the usage of resources by:
 
