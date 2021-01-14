@@ -51,7 +51,7 @@ The resource gives access to some data.
 
 ## CSV File Resource
 
-The file is publicly available on the Github website: [preview of CAPostalCodes.csv](https://github.com/obiba/obiba-home/blob/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv). 
+The file is publicly available on the Github website: <a href="https://github.com/obiba/obiba-home/blob/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv" target="_blank">preview of CAPostalCodes.csv</a>. 
 
 ```{r CAPostalCodes.res}
 CAPostalCodes.res <- resourcer::newResource(
