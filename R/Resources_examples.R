@@ -36,8 +36,7 @@ opal.resource_create(opal = o,
                      project = 'RSRC', 
                      name = 'pheno_TCGA', 
                      url = 'http://duffel.rail.bio/recount/TCGA/TCGA.tsv', 
-                     format = 'tsv',
-                     secret = 'GRGdder')
+                     format = 'tsv')
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -125,7 +124,7 @@ ds.glm(casecontrol ~ rs1422993 + smoke + bmi, data='asthma', family='binomial')
 datashield.logout(conns)
 
 
-## ----eSet, echo=FALSE, fig.cap='ExpressionSet infrastructure', fig.align='center'-----------------
+## ----eSet, echo=FALSE, fig.cap='ExpressionSet infrastructure', fig.align='center', out.width = '60%'----
 knitr::include_graphics("fig/eSet_vs_dataframe.png")
 
 
@@ -178,6 +177,119 @@ datashield.logout(conns)
 ## ----insert_table_variables, echo=FALSE-----------------------------------------------------------
 vars <- readr::read_delim("fig/table_variables_cnsim.txt", delim=",")
 kable(vars)
+
+
+## ----cnsim_multiple-------------------------------------------------------------------------------
+builder <- DSI::newDSLoginBuilder()
+builder$append(server = "study1", url = "https://opal-demo.obiba.org", 
+               user = "dsuser", password = "password", 
+               resource = "RSRC.CNSIM1", driver = "OpalDriver")
+builder$append(server = "study2", url = "https://opal-demo.obiba.org", 
+               user = "dsuser", password = "password", 
+               resource = "RSRC.CNSIM2", driver = "OpalDriver")
+builder$append(server = "study3", url = "https://opal-demo.obiba.org", 
+               user = "dsuser", password = "password", 
+               resource = "RSRC.CNSIM3", driver = "OpalDriver")
+logindata <- builder$build()
+
+
+## -------------------------------------------------------------------------------------------------
+conns <- datashield.login(logins = logindata, assign = TRUE, symbol = "res")
+
+
+## -------------------------------------------------------------------------------------------------
+ds.class("res")
+
+
+## -------------------------------------------------------------------------------------------------
+datashield.assign.expr(conns, symbol = "D", 
+                       expr = quote(as.resource.data.frame(res, strict = TRUE)))
+ds.class("D")
+
+
+## -------------------------------------------------------------------------------------------------
+ds.summary('D$LAB_HDL')
+
+
+## -------------------------------------------------------------------------------------------------
+ds.class('D$GENDER')
+ds.asFactor('D$GENDER', 'GENDER')
+ds.summary('GENDER')
+
+
+## -------------------------------------------------------------------------------------------------
+mod <- ds.glm("DIS_DIAB ~ LAB_TRIG + GENDER", data = "D" , family="binomial")
+mod$coeff
+
+
+## -------------------------------------------------------------------------------------------------
+datashield.logout(conns)
+
+
+## ----plinkResources, echo=FALSE, fig.cap='Computation resource corresponding to PLINK example',  fig.align='center', out.width = '40%'----
+knitr::include_graphics("fig/plink_resource.png")
+
+
+## -------------------------------------------------------------------------------------------------
+library(resourcer)
+ssh.res <- newResource(
+  url = "ssh://plink-demo.obiba.org:2222/home/master/brge?exec=ls,plink1,plink",
+  identity = "master",
+  secret = "master"
+)
+
+
+## -------------------------------------------------------------------------------------------------
+ssh.client <- newResourceClient(ssh.res)
+class(ssh.client)
+
+
+## -------------------------------------------------------------------------------------------------
+ssh.client$getAllowedCommands()
+
+
+## -------------------------------------------------------------------------------------------------
+ssh.client$exec("ls")
+
+
+## -------------------------------------------------------------------------------------------------
+ans <- ssh.client$exec('plink1', c('--bfile', 'brge', '--assoc', '--pheno', 'brge.phe', '--pheno-name', 'obese', '--noweb'))
+ans
+
+
+## ----eval=FALSE-----------------------------------------------------------------------------------
+ssh.client$downloadFile()
+
+
+## ----GWAS_shell_1---------------------------------------------------------------------------------
+  builder <- newDSLoginBuilder()
+  builder$append(server = "study1", url = "https://opal-demo.obiba.org",
+                 user = "dsuser", password = "password",
+                 resource = "RSRC.brge_plink", driver = "OpalDriver")
+  logindata <- builder$build()
+
+
+## ----GWAS_shell_3---------------------------------------------------------------------------------
+  conns <- datashield.login(logins = logindata, assign = TRUE,
+                            symbol = "client")
+  ds.class("client")
+
+
+## -------------------------------------------------------------------------------------------------
+plink.arguments <- "--bfile brge --assoc --pheno brge.phe --pheno-name obese"
+
+
+## -------------------------------------------------------------------------------------------------
+library(dsOmicsClient)
+ans.plink <- ds.PLINK("client", plink.arguments)
+
+
+## ----GWAS_shell_result1---------------------------------------------------------------------------
+lapply(ans.plink, names)
+  
+head(ans.plink$study1$results)
+  
+ans.plink$study$plink.out
 
 
 ## -------------------------------------------------------------------------------------------------
