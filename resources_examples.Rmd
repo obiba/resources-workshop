@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Using the resources in DataSHIELD"
+title: "Tutorial: Using the resources in Opal and DataSHIELD"
 author:
 - name: Juan R. Gonzalez
   affiliation:

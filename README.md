@@ -10,7 +10,7 @@ devtools::install_github("datashield/dsBaseClient")
 ```
 
 - [Vignette resources demo](https://rpubs.com/ymarcon/713068)
-- [Vignette resources examples]()
+- [Vignette resources examples](https://rpubs.com/jrgonzalezISGlobal/tutorial_resources)
 
 
 For the others or if you encounter issues, see instructions that follows.
