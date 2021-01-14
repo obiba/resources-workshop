@@ -44,7 +44,7 @@ In a R console, install these R packages using the commands:
 ```
 install.packages(c("readr", "dplyr", "ssh"))
 install.packages("resourcer", "DSOpal")
-devtools::install_github("datashield/dsBaseClient")
+install.packages("dsBaseClient", repos = c("https://cran.obiba.org"))
 devtools::install_github("isglobal-brge/dsOmicsClient")
 ```
 
