@@ -14,7 +14,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, purl=FALSE}
 library(knitr)
 BiocStyle::markdown()
 options(width=100)
@@ -32,7 +32,7 @@ A quick demo of the resources is also available in [Tutorial: Resources in R](ht
 
 This document can be reproduced by installing the following packages
 
-```{r eval=FALSE}
+```
 install.packages("DSOpal")
 devtools::install_github("datashield/dsBaseClient")
 devtools::install_github("isglobal-brge/dsOmicsClient") 
@@ -56,13 +56,13 @@ We have set up an [Opal demo site](http://opal-demo.obiba.org/) to illustrate ho
 In this figure we can see all the projects available. 
 
 
-```{r projects, echo=FALSE, fig.cap='Opal demo site available projects', fig.align='center'}
+```{r projects, echo=FALSE, fig.cap='Opal demo site available projects', fig.align='center', purl=FALSE}
 knitr::include_graphics("fig/opal_projects.png")
 ```
 
 This tutorial will mainly make use of the resources available at `RSRC` project
 
-```{r resources, echo=FALSE, fig.cap='Resources available at Opal demo site of RSRC project',  fig.align='center'}
+```{r resources, echo=FALSE, fig.cap='Resources available at Opal demo site of RSRC project',  fig.align='center', purl=FALSE}
 knitr::include_graphics("fig/resources_rsrc.png")
 ```
 
@@ -224,7 +224,7 @@ datashield.logout(conns)
 One of the main advantages of using the resources as an R file is that it may contains any type of R object. Let us illustrate this by having an R file with an `ExpressionSet` object which is a [Bioconductor] class to encapsulate omic data along with phenotypic information and annotation. See [here](https://kasperdanielhansen.github.io/genbioconductor/html/ExpressionSet.html) for a description and this figure for a visual idea of how these objects are organized 
 
 
-```{r eSet, echo=FALSE, fig.cap='ExpressionSet infrastructure', fig.align='center', out.width = '60%'}
+```{r eSet, echo=FALSE, fig.cap='ExpressionSet infrastructure', fig.align='center', out.width = '60%', purl=FALSE}
 knitr::include_graphics("fig/eSet_vs_dataframe.png")
 ```
 
@@ -370,7 +370,7 @@ Computation resources are resources on which tasks/commands can be triggered and
 
 PLINK data analysis requires to have genotype data in three files (.bed, .bim, .fam) and phenotype data in a different file. Therefore, the computation resource must contain the data and the commands that are allowed to be run in the server. This can be set up manually in the Opal server as indicated in the next figure
 
-```{r plinkResources, echo=FALSE, fig.cap='Computation resource corresponding to PLINK example',  fig.align='center', out.width = '40%'}
+```{r plinkResources, echo=FALSE, fig.cap='Computation resource corresponding to PLINK example',  fig.align='center', out.width = '40%', purl=FALSE}
 knitr::include_graphics("fig/plink_resource.png")
 ```
 
