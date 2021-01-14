@@ -23,7 +23,7 @@ knitr::opts_chunk$set(comment="", warning=FALSE, message=FALSE, cache=TRUE)
 
 # The resourcer Package
 
-The [resourcer](https://cran.r-project.org/package=resourcer) package is an R implementation of the concept of Resources (see also the [source repository](https://github.com/obiba/resourcer)).
+The [resourcer](https://cran.r-project.org/package=resourcer) package is an R implementation of the concept of Resources (see also the <a href="https://github.com/obiba/resourcer" target="_blank">source repository</a>).
 
 ## Installation
 
@@ -197,4 +197,4 @@ The Opal data management server facilitates the usage of resources by:
 * assigning resources in a R server session,
 * integrating resources to DataSHIELD.
 
-See also [Tutorial: Using the resources in Opal and DataSHIELD](https://rpubs.com/jrgonzalezISGlobal/tutorial_resources).
+See also <a href="https://rpubs.com/jrgonzalezISGlobal/tutorial_resources" target="_blank">Tutorial: Using the resources in Opal and DataSHIELD</a>.
