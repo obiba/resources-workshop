@@ -1,15 +1,43 @@
 ---
-title: "Resources Demo"
-output: html_document
+title: "Tutorial: Resources in R"
+author:
+- name: Yannick Marcon
+  affiliation:
+  - &epigeny Epigeny
+  email: yannick.marcon@obiba.org
+date: "`r Sys.Date()`"
+output:
+  BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Tutorial: Resources in R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+BiocStyle::markdown()
+options(width=100)
+knitr::opts_chunk$set(comment="", warning=FALSE, message=FALSE, cache=TRUE)
 ```
 
-## The resourcer Package
+# The resourcer Package
 
-Load the [resourcer](https://cran.r-project.org/package=R6) package (see also [source repository](https://github.com/obiba/resourcer). The output of this library load informs about the available resource **resolvers**. These are responsible for building the appropriate connector to a resource object. This set of resolvers can be extended to new types of resources.
+The [resourcer](https://cran.r-project.org/package=resourcer) package is an R implementation of the concept of Resources (see also the [source repository](https://github.com/obiba/resourcer)).
+
+## Installation
+
+Install the package if not already available in the R environment.
+
+```{r install, message=FALSE}
+if (!require(resourcer)) {
+  install.packages(c("resourcer"))
+}
+```
+
+## Load
+
+When loading the [resourcer](https://cran.r-project.org/package=resourcer) package, the output informs about the available resource **resolvers**. These are responsible for building the appropriate connector to a resource object. This set of resolvers can be extended to new types of resources.
 
 ```{r load, message=FALSE}
 library(resourcer)
@@ -17,11 +45,11 @@ library(resourcer)
 
 Note that the `resourcer` package makes an extensive use of the [R6](https://cran.r-project.org/package=R6) class system.
 
-## Building a Data Resource Object
+# Building a Data Resource Object
 
 The resource gives access to some data.
 
-### CSV File Resource
+## CSV File Resource
 
 The file is publicly available on the Github website: [preview of CAPostalCodes.csv](https://github.com/obiba/obiba-home/blob/master/opal/seed/fs/home/administrator/geo/CAPostalCodes.csv). 
 
@@ -61,7 +89,7 @@ head(CAPostalCodes.data)
 ```
 
 
-### R Data File Resource
+## R Data File Resource
 
 The file is stored in a Opal server file system. Authentication and authorization apply and is performed with a [Personal Access Token](http://opaldoc.obiba.org/en/latest/web-user-guide/my-profile.html#personal-access-tokens).
 
@@ -91,11 +119,11 @@ head(gps_participant.data)
 
 There are no limitations regarding the class of the object contained in the R data file. The only requirements are the ones of the `base::load()` function, i.e. the library in which the class of the object is defined must be available in the R environment.
 
-## Building a Computation Resource Object
+# Building a Computation Resource Object
 
 The resource gives access to some remote computation services.
 
-### SSH Resource
+## SSH Resource
 
 A server is accessible through a secure shell. The path part of the URL is the remote working directory. The available commands are defined by the `exec` query parameter.
 
@@ -153,13 +181,13 @@ Calling a shell command that is not allowed would raise an error.
 tryCatch(ssh.client$exec("plink"), error = function(e) e)
 ```
 
-## More About Resources
+# More About Resources
 
-### Extending Resources
+## Extending Resources
 
 The `resourcer` package comes with some built-in resource types. These can be extended by programming your own resource resolver and client. For more information, read the sections about Resources in the book [Orchestrating privacy-protected non-disclosive big data analyses of data from different resources with R and DataSHIELD](https://isglobal-brge.github.io/resource_bookdown).
 
-### Resources in Opal
+## Resources in Opal
 
 The Opal data management server facilitates the usage of resources by:
 
@@ -169,3 +197,4 @@ The Opal data management server facilitates the usage of resources by:
 * assigning resources in a R server session,
 * integrating resources to DataSHIELD.
 
+See also [Tutorial: Using the resources in Opal and DataSHIELD](https://rpubs.com/jrgonzalezISGlobal/tutorial_resources).
