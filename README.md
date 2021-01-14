@@ -1,5 +1,12 @@
 # Resources Workshop
 
+The two tutorials can be found here:
+
+- [Vignette resources demo](https://rpubs.com/ymarcon/713068)
+- [Vignette resources examples](https://rpubs.com/jrgonzalezISGlobal/tutorial_resources)
+
+In order to reproduce the two vignettes follow the instructions described in the next sections
+
 ## Quick Start
 
 For those in hurry:
@@ -8,10 +15,6 @@ For those in hurry:
 install.packages(c("readr", "dplyr", "ssh", "resourcer", "DSOpal"))
 devtools::install_github("datashield/dsBaseClient")
 ```
-
-- [Vignette resources demo](https://rpubs.com/ymarcon/713068)
-- [Vignette resources examples](https://rpubs.com/jrgonzalezISGlobal/tutorial_resources)
-
 
 For the others or if you encounter issues, see instructions that follows.
 
