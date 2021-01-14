@@ -99,6 +99,8 @@ conda install -c conda-forge openssl
 
 # ssh requirements:
 conda install -c conda-forge libssh2
+
+# git requirements:
 conda install -c conda-forge libgit2
 ```
 
