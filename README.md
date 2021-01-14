@@ -63,3 +63,7 @@ In a R console, install the R packages using the commands:
 install.packages(c("readr", "dplyr", "ssh"))
 install.packages("resourcer")
 ```
+
+### 3. Try it yourself
+
+Try the R code in the [R](https://github.com/obiba/resources-workshop/tree/main/R) folder.
