@@ -5,7 +5,8 @@
 For those in hurry:
 
 ```
-install.packages(c("readr", "dplyr", "ssh", "resourcer"))
+install.packages(c("readr", "dplyr", "ssh", "resourcer", "DSOpal"))
+devtools::install_github("datashield/dsBaseClient")
 ```
 
 For the others or if you encounter issues, see instructions that follows.
@@ -35,7 +36,7 @@ In a R console, install these R packages using the commands:
 
 ```
 install.packages(c("readr", "dplyr", "ssh"))
-install.packages("resourcer")
+install.packages("resourcer", "DSOpal")
 devtools::install_github("datashield/dsBaseClient")
 devtools::install_github("isglobal-brge/dsOmicsClient")
 ```
