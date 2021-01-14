@@ -16,6 +16,13 @@ install.packages(c("readr", "dplyr", "ssh", "resourcer", "DSOpal"))
 install.packages("dsBaseClient", repos = c("https://cran.obiba.org"))
 ```
 
+Some dependencies can be needed:
+
+```
+install.packages(c("fields","metafor","ggplot2","gridExtra","data.table"))
+```
+
+
 For the others or if you encounter issues, see instructions that follows.
 
 ## Prerequisites
@@ -43,12 +50,17 @@ In a R console, install these R packages using the commands:
 
 ```
 install.packages(c("readr", "dplyr", "ssh"))
-install.packages("resourcer", "DSOpal")
+install.packages(c("resourcer", "DSOpal"))
 install.packages("dsBaseClient", repos = c("https://cran.obiba.org"))
 devtools::install_github("isglobal-brge/dsOmicsClient")
 ```
 
+Some dependencies can be needed:
 
+```
+install.packages(c("fields","metafor","ggplot2","gridExtra","data.table",
+                  "ggrepel"))
+```
 
 ### 1. R environment
 
@@ -74,6 +86,20 @@ sudo apt-get install libssl-dev
 
 # ssh requirements:
 sudo apt-get install libssh2-1-dev
+```
+
+#### Conda
+
+```
+# curl requirements:
+conda install -c anaconda libcurl
+
+# openssl requirements:
+conda install -c conda-forge openssl
+
+# ssh requirements:
+conda install -c conda-forge libssh2
+conda install -c conda-forge libgit2
 ```
 
 #### Windows
