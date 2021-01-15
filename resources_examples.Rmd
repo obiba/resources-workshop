@@ -224,7 +224,7 @@ datashield.logout(conns)
 One of the main advantages of using the resources as an R file is that it may contains any type of R object. Let us illustrate this by having an R file with an `ExpressionSet` object which is a [Bioconductor] class to encapsulate omic data along with phenotypic information and annotation. See [here](https://kasperdanielhansen.github.io/genbioconductor/html/ExpressionSet.html) for a description and this figure for a visual idea of how these objects are organized 
 
 
-```{r eSet, echo=FALSE, fig.cap='ExpressionSet infrastructure', fig.align='center', out.width = '60%', purl=FALSE}
+```{r eSet, echo=FALSE, fig.cap='ExpressionSet infrastructure', fig.align='center', out.width = '70%', purl=FALSE}
 knitr::include_graphics("fig/eSet_vs_dataframe.png")
 ```
 
@@ -471,10 +471,6 @@ ans.plink$study$plink.out
 ```
   
 
-
-
-
-
 Let us finish our tutorial by removing the created resources
 
 ```{r}
@@ -482,6 +478,36 @@ opal.resource_delete(opal=o, project='RSRC', resource='pheno_TCGA')
 opal.resource_delete(opal=o, project='RSRC', resource='asthma')
 opal.resource_delete(opal=o, project='RSRC', resource='genexpr')
 ```
+
+# Exercise
+
+Physiological ecologists often analyze the responses of physiological or biochemical traits to environmental factors such as temperature, irradiance, water potential, or the concentrations of CO2, O2, and inorganic nutrients. Some researchers were interested in knowing the relationship between CO2 uptake (variable `uptake`) for six Echinochloa crus-galli plants from Quebec and six plants from Mississippi as a function of ambient CO2 concentration (variable `conc`). 
+
+The CO2 uptake of six plants from Quebec and six plants from Mississippi was measured at several levels of ambient CO2 concentration. Half the plants of each type were chilled overnight before the experiment was conducted.  
+
+Data cannot be shared between plants given confidentiality restrictions and researchers are interested in pooling both datasets via a virtually pooled-analysis. The scheme of the project can be seen in the next figure
+
+
+```{r exercise, echo=FALSE, fig.cap='Carbon Dioxide Uptake in Quebec and Mississippi Grass Plants. Scheme of the proposed data analysis using DataSHIELD. Data of two locations are stored in different repositories and are available as .tsv files.', fig.align='center', purl=FALSE, out.width = '80%'}
+knitr::include_graphics("fig/exercise.png")
+```
+
+Both datasets are .tsv files that are available in two different locations:
+
+- **Quebec** (IGSlobal repository): https://raw.githubusercontent.com/isglobal-brge/brgedata/master/inst/extdata/co2_quebec.tsv
+
+- **Mississippi** (OBiBa repository): https://raw.githubusercontent.com/obiba/resources-workshop/main/data/co2_mississippi.tsv
+
+To the following steps to perform the required analysis:
+
+
+1. Upload the two resources to the project `RSRC` available at the demo Opal site (https://opal-demo.obiba.org/, u:administrator, p:password). **IMPORTANT NOTE:** In order to avoid problems with duplicated names (all you are using the same server) give a name to the two resources like `boston_XXXXXX` and `mississippi_XXXXXX` and replace `XXXXXX` by **random** lower and upper letters (for example: boston_QrTyUZ and mississippi_AgbnYJ).
+2. Login the connection to the two resources to DataSHIELD and assign the resources to objects having the same name as the resource name (in our case boston_QrTyUZ and mississippi_AgbnYJ).
+3. Using `dsBase` functions:
+     - Check that the number of observations at each study (variable `Type`) is 42.
+     - Create a boxplot of the CO2 uptake (variable `uptake`) by study.
+     - Create an scatterplot of the CO2 uptake (X-axis) vs CO2 concentration (variable `conc`) (Y-axix).
+     - Run a linear model to investigate whether there are differences between the two studies (`Type`) adjusting for chilled overnight factor (`Treatment`).
 
 
 # Session Info
