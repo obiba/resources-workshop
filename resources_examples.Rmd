@@ -503,11 +503,11 @@ To the following steps to perform the required analysis:
 
 1. Upload the two resources to the project `RSRC` available at the demo Opal site (https://opal-demo.obiba.org/, u:administrator, p:password). **IMPORTANT NOTE:** In order to avoid problems with duplicated names (all you are using the same server) give a name to the two resources like `boston_XXXXXX` and `mississippi_XXXXXX` and replace `XXXXXX` by **random** lower and upper letters (for example: boston_QrTyUZ and mississippi_AgbnYJ).
 2. Login the connection to the two resources to DataSHIELD and assign the resources to objects having the same name as the resource name (in our case boston_QrTyUZ and mississippi_AgbnYJ).
-3. Using `dsBase` functions:
+3. Using `dsBaseClient` functions (for those new in DataSHIELD see `ls("package:dsBaseClient")`): 
+     - Check the names of the variables of each data frame.
      - Check that the number of observations at each study (variable `Type`) is 42.
-     - Create a boxplot of the CO2 uptake (variable `uptake`) by study.
-     - Create an scatterplot of the CO2 uptake (X-axis) vs CO2 concentration (variable `conc`) (Y-axix).
-     - Run a linear model to investigate whether there are differences between the two studies (`Type`) adjusting for chilled overnight factor (`Treatment`).
+     - Create a "combined" scatterplot of the CO2 uptake (Y-axis) vs CO2 concentration (variable `conc`) (X-axix).
+     - Run a linear model to investigate whether CO2 concentration can predicts CO2 uptake adjusting for chilled overnight factor (`Treatment`) and study (`Type`). 
 
 
 # Session Info
