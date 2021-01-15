@@ -40,6 +40,7 @@ builder$append(server = 'study2', url = 'https://opal-demo.obiba.org',
 logindata <- builder$build()
 
 conns <- datashield.login(logins = logindata, assign = TRUE, symbol = 'res')
+ds.class('res')
 
 # We then coerce the `ResourceClient` objects to data frames
 
@@ -51,7 +52,7 @@ ds.class('D')
 ds.colnames('D')
 ds.table('D$Type')
 ds.scatterPlot('D$conc', 'D$uptake', type = 'combine')
-ds.glm('uptake ~ conc + Treatment + Type', data='D', family='gaussian')
+ds.glm('uptake ~ conc + Treatment', data='D', family='gaussian')
 
 # Logout the connection
 datashield.logout(conns)
