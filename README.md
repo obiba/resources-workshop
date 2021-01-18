@@ -2,7 +2,7 @@
 
 The two tutorials can be found here:
 
-- [Vignette resources demo](https://rpubs.com/ymarcon/713068)
+- [Vignette resources demo](https://rpubs.com/obiba/resources-in-r)
 - [Vignette resources examples](https://rpubs.com/jrgonzalezISGlobal/tutorial_resources)
 
 In order to reproduce the two vignettes follow the instructions described in the next sections
