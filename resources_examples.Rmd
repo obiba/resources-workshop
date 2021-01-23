@@ -14,7 +14,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE, purl=FALSE}
+```{r setup_param, include=FALSE, purl=FALSE}
 library(knitr)
 BiocStyle::markdown()
 options(width=100)
@@ -270,17 +270,18 @@ ds.dim('eSet')
 
 In that case, if we execute
 
-```{r error=TRUE}
-ds.colnames('eSet')
+```
+ds.dim('eSet')
 ```
 
-we get an error, but ... we have developed a pair of DataSHIELD packages, called `dsOmics` and `dsOmicsClient` that allow us to deal with this type of objects in DataSHIELD. 
+we get an error, but ... we have developed a pair of DataSHIELD packages, called `dsOmics` and `dsOmicsClient` that allow us to deal with this type of objects in DataSHIELD and that are able to get the desired information (i.e. the dimension of the `ExpressionSet`). 
 
 ```{r}
-dsOmicsClient::ds.featureData('eSet')
+dsOmicsClient::ds.nFeatures('eSet')
+dsOmicsClient::ds.nSamples('eSet')
 ```
 
-We finish the example by loggin out
+We finish the example by login out
 
 ```{r}
 datashield.logout(conns)
