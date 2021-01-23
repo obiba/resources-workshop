@@ -14,6 +14,7 @@ For those in hurry:
 ```
 install.packages(c("readr", "dplyr", "ssh", "resourcer", "DSOpal"))
 install.packages("dsBaseClient", repos = c("https://cran.obiba.org"))
+devtools::install_github("isglobal-brge/dsOmicsClient")
 ```
 
 Some dependencies can be needed:
