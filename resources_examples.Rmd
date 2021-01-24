@@ -124,7 +124,7 @@ We logout the connection
 opal.logout(o)
 ```
 
-Then, we can analyze the data using DataSHIELD by making use of the created resource. We start by login the resource using an user who have DataSHIELD permissions to our Opal server (dsuser). 
+Then, we can analyze the data using DataSHIELD by making use of the created resource. We start by login the resource using an user who have DataSHIELD permissions to our Opal server (**dsuser**). 
 
 ```{r}
 builder <- newDSLoginBuilder()
@@ -135,7 +135,7 @@ logindata <- builder$build()
 ```
 
 
-Then, we load the resource into R as `res`
+Then, we login the resource to asssign (R object called `res`)
 
 ```{r}
 conns <- datashield.login(logins = logindata, 
@@ -299,18 +299,22 @@ datashield.logout(conns)
 ```
 
 
-# Exercise
+# Exercise 1
 > He have collected information on gene expression of the 1000 more variable genes measured in skin biopsies  from 10 patients with active atopic eczema and 10 healthy controls (GEO accesion number [GSE6012](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE6012). The `ExpressionSet` is available  at: 
 >
 > - https://github.com/isglobal-brge/brgedata/raw/master/data/GSE6012.Rdata
 >
 > 1. Create a resource into the project `workshop` available at the demo Opal site (https://opal-demo.obiba.org/, u:administrator, p:password). **IMPORTANT NOTE:** In order to avoid problems with duplicated names (all of you are using the same server) give a name to the resources like `eSet_XXXXXX` and replace `XXXXXX` by **random** lower and upper letters (for example: eSet_DrMMuZ).
 >
-> 2. Login the connection to the resource to DataSHIELD and assign the resources to an object having the same name as the resource name (in my case eSet_DrMMuZ).
+> 2. Login the connection to the resource to DataSHIELD using these credentials:
+>     - user: dsuser
+>     - password: password
 >
-> 3. Load `dsOmicsClient` package and use `ds.nFeatures ()` and `ds.nSamples ()` functions to verify that the loaded object is having the proper dimensions.
+> 3. Assign the resources to an R object having the same name as the resource name (in my case eSet_DrMMuZ).
 >
-> 4. Investigate the `dsOmicsClient` package (type `ls("package:dsOmicsClient")` in the R console) to find a function for knowing the names of the covariates in the metadata on samples
+> 4. Load `dsOmicsClient` package and use `ds.nFeatures ()` and `ds.nSamples ()` functions to verify that the loaded object is having the proper dimensions.
+>
+> 5. Investigate the `dsOmicsClient` package (type `ls("package:dsOmicsClient")` in the R console) to find a function for knowing the names of the covariates in the metadata on samples
 >
 
 
@@ -507,7 +511,7 @@ opal.resource_delete(opal=o, project='RSRC', resource='asthma')
 opal.resource_delete(opal=o, project='RSRC', resource='genexpr')
 ```
 
-# Exercise
+# Exercise 2
 
 > Physiological ecologists often analyze the responses of physiological or biochemical traits to environmental factors such as temperature, irradiance, water potential, or the concentrations of CO2, O2, and inorganic nutrients. Some researchers were interested in knowing the relationship between CO2 uptake (variable `uptake`) for six Echinochloa crus-galli plants from Quebec and six plants from Mississippi as a function of ambient CO2 concentration (variable `conc`). 
 > 
@@ -529,8 +533,12 @@ knitr::include_graphics("fig/exercise.png")
 > Do the following steps to perform the required analysis:
 > 
 > 1. Upload the two resources to the project `workshop` available at the demo Opal site (https://opal-demo.obiba.org/, u:administrator, p:password). **IMPORTANT NOTE:** In order to avoid problems with duplicated names (all you are using the same server) give a name to the two resources like `boston_XXXXXX` and `mississippi_XXXXXX` and replace `XXXXXX` by **random** lower and upper letters (for example: boston_QrTyUZ and mississippi_AgbnYJ).
-> 2. Login the connection to the two resources to DataSHIELD and assign the resources to objects having the same name as the resource name (in our case boston_QrTyUZ and mississippi_AgbnYJ).
-> 3. Using `dsBaseClient` functions (for those new in DataSHIELD see `ls("package:dsBaseClient")`): 
+> 2. Login the connection to the resource to DataSHIELD using these credentials:
+>     - user: dsuser
+>     - password: password
+>
+> 3. Assign the resources to objects having the same name as the resource name (in our case boston_QrTyUZ and mississippi_AgbnYJ).
+> 4. Using `dsBaseClient` functions (for those new in DataSHIELD see `ls("package:dsBaseClient")`): 
      - Check the names of the variables of each data frame.
      - Check that the number of observations at each study (variable `Type`) is 42.
      - Create a "combined" scatterplot of the CO2 uptake (Y-axis) vs CO2 concentration (variable `conc`) (X-axix).
