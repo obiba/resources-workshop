@@ -15,7 +15,6 @@ opal.resource_create(opal = o,
                      url = 'https://github.com/isglobal-brge/brgedata/raw/master/data/GSE6012.Rdata', 
                      format = 'ExpressionSet')
 
-opal.resources(o, project='RSRC')
 opal.resources(o, project='workshop')
 
 opal.logout(o)

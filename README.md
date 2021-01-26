@@ -20,7 +20,8 @@ devtools::install_github("isglobal-brge/dsOmicsClient")
 Some dependencies can be needed:
 
 ```
-install.packages(c("fields","metafor","ggplot2","gridExtra","data.table"))
+install.packages(c("fields","metafor","ggplot2","gridExtra",
+                   "data.table", "ggrepel"))
 ```
 
 
