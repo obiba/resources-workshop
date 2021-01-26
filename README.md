@@ -24,7 +24,7 @@ install.packages(c("fields","metafor","ggplot2","gridExtra",
                    "data.table", "ggrepel"))
 ```
 
-An probably [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
+And probably [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 
 
 For the others or if you encounter issues, see instructions that follows.
