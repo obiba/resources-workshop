@@ -32,10 +32,10 @@ opal.logout(o)
 builder <- DSI::newDSLoginBuilder()
 builder$append(server = 'study1', url = 'https://opal-demo.obiba.org', 
                user = 'dsuser', password = 'password', 
-               resource = 'RSRC.quebec_jrgonz', driver = 'OpalDriver')
+               resource = 'workshop.quebec_jrgonz')
 builder$append(server = 'study2', url = 'https://opal-demo.obiba.org', 
                user = 'dsuser', password = 'password', 
-               resource = 'RSRC.mississippi_jrgonz', driver = 'OpalDriver')
+               resource = 'workshop.mississippi_jrgonz')
 
 logindata <- builder$build()
 
