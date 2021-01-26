@@ -86,7 +86,7 @@ sudo apt-get install libcurl4-openssl-dev libssl-dev
 sudo apt-get install libssl-dev
 
 # ssh requirements:
-sudo apt-get install libssh2-1-dev
+sudo apt-get install libssh2-1-dev libssh-dev
 ```
 
 #### Conda
