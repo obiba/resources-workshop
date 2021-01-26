@@ -304,7 +304,11 @@ datashield.logout(conns)
 >
 > - https://github.com/isglobal-brge/brgedata/raw/master/data/GSE6012.Rdata
 >
-> 1. Create a resource into the project `workshop` available at the demo Opal site (https://opal-demo.obiba.org/, u:administrator, p:password). **IMPORTANT NOTE:** In order to avoid problems with duplicated names (all of you are using the same server) give a name to the resources like `eSet_XXXXXX` and replace `XXXXXX` by **random** lower and upper letters (for example: eSet_DrMMuZ).
+> 1. Create a resource into the project `workshop` available at the demo Opal site (https://opal-demo.obiba.org/)
+>     - user: administrator
+>     - password: password
+>
+**IMPORTANT NOTE:** In order to avoid problems with duplicated names (all of you are using the same server) give a name to the resources like `eSet_XXXXXX` and replace `XXXXXX` by **random** lower and upper letters (for example: eSet_DrMMuZ).
 >
 > 2. Login the connection to the resource to DataSHIELD using these credentials:
 >     - user: dsuser
