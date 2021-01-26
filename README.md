@@ -12,7 +12,7 @@ In order to reproduce the two vignettes follow the instructions described in the
 For those in hurry:
 
 ```
-install.packages(c("readr", "dplyr", "ssh", "resourcer", "DSOpal"))
+install.packages(c("readr", "dplyr", "ssh", "resourcer", "DSOpal", "ggrepel"))
 install.packages("dsBaseClient", repos = c("https://cran.obiba.org"))
 devtools::install_github("isglobal-brge/dsOmicsClient")
 ```
@@ -23,6 +23,8 @@ Some dependencies can be needed:
 install.packages(c("fields","metafor","ggplot2","gridExtra",
                    "data.table", "ggrepel"))
 ```
+
+An probably [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 
 
 For the others or if you encounter issues, see instructions that follows.
